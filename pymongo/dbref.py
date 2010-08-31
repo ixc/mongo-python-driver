@@ -115,3 +115,19 @@ class DBRef(object):
         """
         return hash((self.__collection, self.__id,
                      self.__database, self.__kwargs))
+
+    def __getstate__(self):
+        """Allow DBRefs to be pickled (IxC fork)"""
+        
+        return {
+            'database': self.__database,
+            'collection': self.__collection,
+            'id': self.__id,
+            'kwargs': self.__kwargs,
+        }
+        
+    def __setstate__(self, d):
+        self.__database = d['database']
+        self.__collection = d['collection']
+        self.__id = d['id']
+        self.__kwargs = d['kwargs']
