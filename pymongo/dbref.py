@@ -77,6 +77,13 @@ class DBRef(object):
         """
         return self.__database
 
+    @property
+    def kwargs(self):
+        """
+        (IxC fork)
+        """
+        return self.__kwargs
+
     def __getattr__(self, key):
         return self.__kwargs[key]
 
